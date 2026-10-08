@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T19:48:58+00:00",
+  "title": "Design System: Premier Outdoor Solutions",
+  "extensions": {
+    "colorMeta": {
+      "lime": {
+        "role": "primary",
+        "displayName": "Logo Lime",
+        "canonical": "#6fd43f",
+        "tonalRamp": [
+          "#030f00",
+          "#102d03",
+          "#1e4f01",
+          "#317306",
+          "#47991a",
+          "#5cc125",
+          "#81e754",
+          "#cfffbe"
+        ]
+      },
+      "lime-hi": {
+        "role": "primary",
+        "displayName": "Lime Flash",
+        "canonical": "#8be35f",
+        "tonalRamp": [
+          "#030f00",
+          "#112d02",
+          "#214f00",
+          "#347303",
+          "#4b9817",
+          "#68be37",
+          "#8ce460",
+          "#d1febe"
+        ]
+      },
+      "lime-ink": {
+        "role": "primary",
+        "displayName": "Lime Ink",
+        "canonical": "#0c1f12",
+        "tonalRamp": [
+          "#010f05",
+          "#172a1d",
+          "#334839",
+          "#526757",
+          "#738978",
+          "#95ac9a",
+          "#b8d0be",
+          "#ddf6e3"
+        ]
+      },
+      "leaf-green": {
+        "role": "primary",
+        "displayName": "Leaf Green",
+        "canonical": "#2f7a1f",
+        "tonalRamp": [
+          "#011000",
+          "#092e03",
+          "#115000",
+          "#287417",
+          "#4c973e",
+          "#6fbb61",
+          "#93e085",
+          "#cffec6"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Deep Ground",
+        "canonical": "#12261d",
+        "tonalRamp": [
+          "#000f08",
+          "#162a21",
+          "#33473d",
+          "#51675c",
+          "#72897d",
+          "#94aca0",
+          "#b8d0c3",
+          "#dcf6e9"
+        ]
+      },
+      "ground-2": {
+        "role": "neutral",
+        "displayName": "Ground Two",
+        "canonical": "#183326",
+        "tonalRamp": [
+          "#000f07",
+          "#102b1f",
+          "#2e493b",
+          "#4c695a",
+          "#6d8a7b",
+          "#8fad9d",
+          "#b2d2c1",
+          "#d7f8e6"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cleared Floor",
+        "canonical": "#f1efe6",
+        "tonalRamp": [
+          "#0d0b06",
+          "#27251e",
+          "#44423b",
+          "#63615a",
+          "#84827a",
+          "#a7a59d",
+          "#cbc9c1",
+          "#f1efe6"
+        ]
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Swept Paper",
+        "canonical": "#e6e3d6",
+        "tonalRamp": [
+          "#0d0b04",
+          "#27251b",
+          "#454238",
+          "#646156",
+          "#858277",
+          "#a8a599",
+          "#ccc9bd",
+          "#f2efe2"
+        ]
+      },
+      "card-white": {
+        "role": "neutral",
+        "displayName": "Card White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#13241c",
+        "tonalRamp": [
+          "#020f08",
+          "#182921",
+          "#35473e",
+          "#53665d",
+          "#74887e",
+          "#96aba0",
+          "#bacfc4",
+          "#dff5e9"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "#43574b",
+        "tonalRamp": [
+          "#010f06",
+          "#172a1f",
+          "#34473c",
+          "#52675b",
+          "#73887b",
+          "#95ab9e",
+          "#b9d0c2",
+          "#def5e7"
+        ]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "On Dark",
+        "canonical": "#f4f6f1",
+        "tonalRamp": [
+          "#0a0c09",
+          "#242622",
+          "#41433f",
+          "#60625e",
+          "#81837f",
+          "#a4a6a1",
+          "#c8cac5",
+          "#edefea"
+        ]
+      },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "On Dark Soft",
+        "canonical": "#b8cbbd",
+        "tonalRamp": [
+          "#030f06",
+          "#1a291f",
+          "#37473b",
+          "#55665a",
+          "#76887b",
+          "#98ab9d",
+          "#bccfc1",
+          "#e1f4e6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Stacked one-line-per-span lists; last line lime."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Service rows and card headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Pitch and ledes, 34-44ch."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Sub-lines, notes, footer."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "All pill buttons."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase form legends and field labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "lift",
+        "value": "0 10px 28px -12px rgba(6,20,12,.55)",
+        "purpose": "Heavy-lifting callout and closing logo (--shadow)."
+      },
+      {
+        "name": "button",
+        "value": "0 10px 22px -12px rgba(4,14,8,.7)",
+        "purpose": "Primary buttons."
+      },
+      {
+        "name": "panel",
+        "value": "0 18px 40px -20px rgba(19,36,28,.45)",
+        "purpose": "Quote card on paper."
+      },
+      {
+        "name": "roundel",
+        "value": "0 18px 30px -16px rgba(0,0,0,.7)",
+        "purpose": "Hero logo (desktop 0 30px 60px -30px)."
+      },
+      {
+        "name": "bar",
+        "value": "0 -10px 24px -14px rgba(0,0,0,.6)",
+        "purpose": "Sticky phone bar, cast upward."
+      },
+      {
+        "name": "sprite",
+        "value": "canvas shadow rgba(4,14,8,.42), blur 0.08*size, offset 0.04*size x / 0.07*size y",
+        "purpose": "Every junk sprite."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-snap",
+        "value": "cubic-bezier(.2,.9,.3,1)",
+        "purpose": "Buttons, service rows, sticky bar."
+      },
+      {
+        "name": "duration-press",
+        "value": "150ms",
+        "purpose": "Chips."
+      },
+      {
+        "name": "duration-button",
+        "value": "180ms",
+        "purpose": "Button hover/press."
+      },
+      {
+        "name": "duration-row",
+        "value": "250ms",
+        "purpose": "Service row hover."
+      },
+      {
+        "name": "duration-bar",
+        "value": "350ms",
+        "purpose": "Sticky bar slide."
+      },
+      {
+        "name": "pile",
+        "value": "phoneCount 16, deskCount 40, phoneSize [42,64], deskSize [56,96], gravity 2000, pushRadius [76,120], pushForce 2600, carry 1.4, haulHeight [190,290], respawn 1.6, leaves [9,22], wind 26",
+        "purpose": "makePile defaults (hero). Close overrides: phoneCount 12, deskCount 26, phoneSize [38,56], deskSize [50,84], haulHeight [150,220], leaves [6,14]."
+      },
+      {
+        "name": "seam",
+        "value": "SPEED 1.0, SWELL [10,5], RIPPLE 3.2, GAP 11",
+        "purpose": "Seam ripple constants."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "single settled frame",
+        "purpose": "All canvases and seams paint once and stay still."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop",
+        "value": "760px"
+      },
+      {
+        "name": "wide",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The lime Messenger call to action; the only filled button.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 2.2C6.4 2.2 2 6.3 2 11.6c0 2.8 1.2 5.2 3.2 6.9v3.3l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2.2 12 2.2Zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7Z\"/></svg>Message for a free estimate</a></div>",
+      "css": ":root{--ground:#12261d;--ground-2:#183326;--lime:#6fd43f;--lime-hi:#8be35f;--lime-ink:#0c1f12;--paper:#f1efe6;--paper-2:#e6e3d6;--ink:#13241c;--ink-soft:#43574b;--on-dark:#f4f6f1;--on-dark-soft:#b8cbbd;--leaf-green:#2f7a1f;--radius:14px;--shadow:0 10px 28px -12px rgba(6,20,12,.55);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}.ds-dark{background:#12261d;padding:24px}.ds-btn{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 22px;border-radius:999px;font-weight:800;font-size:17px;line-height:1.1;text-decoration:none;border:2px solid #6fd43f;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.3,1),background-color .18s}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:3px solid #6fd43f;outline-offset:3px}.ds-btn-primary{background:#6fd43f;color:#0c1f12;box-shadow:0 10px 22px -12px rgba(4,14,8,.7)}.ds-btn-primary:hover{background:#8be35f;transform:translateY(-2px)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Lime-outlined pill on the green ground; leaf-green border and ink text on paper.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-btn ds-btn-secondary\" href=\"#\">What we take</a></div><div class=\"ds-paper\"><button class=\"ds-btn ds-btn-secondary ds-on-paper\">Copy message</button></div>",
+      "css": ":root{--ground:#12261d;--ground-2:#183326;--lime:#6fd43f;--lime-hi:#8be35f;--lime-ink:#0c1f12;--paper:#f1efe6;--paper-2:#e6e3d6;--ink:#13241c;--ink-soft:#43574b;--on-dark:#f4f6f1;--on-dark-soft:#b8cbbd;--leaf-green:#2f7a1f;--radius:14px;--shadow:0 10px 28px -12px rgba(6,20,12,.55);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}.ds-dark{background:#12261d;padding:24px}.ds-paper{background:#f1efe6;padding:24px}.ds-btn{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 22px;border-radius:999px;font-weight:800;font-size:17px;line-height:1.1;text-decoration:none;border:2px solid #6fd43f;cursor:pointer;transition:transform .18s cubic-bezier(.2,.9,.3,1),background-color .18s}.ds-btn:active{transform:scale(.97)}.ds-btn:focus-visible{outline:3px solid #6fd43f;outline-offset:3px}.ds-btn-secondary{background:transparent;color:#f4f6f1}.ds-btn-secondary:hover{background:rgba(111,212,63,.12);transform:translateY(-2px)}.ds-on-paper{color:#13241c;border-color:#2f7a1f}.ds-on-paper:focus-visible{outline-color:#2f7a1f}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill toggle over a hidden checkbox or radio in the quote builder.",
+      "html": "<div class=\"ds-wrap\"><label class=\"ds-chip\"><input type=\"checkbox\" checked><span>Furniture</span></label><label class=\"ds-chip\"><input type=\"checkbox\"><span>Yard debris</span></label><label class=\"ds-chip\"><input type=\"checkbox\"><span>Not sure</span></label></div>",
+      "css": ".ds-wrap{background:#fff;padding:20px;display:flex;flex-wrap:wrap;gap:8px}.ds-chip{position:relative}.ds-chip input{position:absolute;opacity:0;width:1px;height:1px}.ds-chip span{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid #e6e3d6;background:#f1efe6;color:#13241c;font-weight:700;font-size:15px;cursor:pointer;transition:background-color .15s,border-color .15s,transform .15s}.ds-chip input:checked+span{background:#13241c;border-color:#13241c;color:#f1efe6}.ds-chip input:focus-visible+span{outline:3px solid #2f7a1f;outline-offset:2px}.ds-chip span:active{transform:scale(.96)}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Quote builder field: paper fill, leaf-green border and white fill on focus.",
+      "html": "<div class=\"ds-wrap\"><label class=\"ds-label\" for=\"ds-town\">Town</label><input class=\"ds-input\" id=\"ds-town\" placeholder=\"e.g. Edison\"></div>",
+      "css": ".ds-wrap{background:#fff;padding:20px}.ds-label{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);display:block;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;color:#13241c}.ds-input{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);width:100%;box-sizing:border-box;min-height:52px;border-radius:12px;border:2px solid #e6e3d6;background:#f1efe6;padding:0 14px;font-size:17px;font-weight:500;color:#13241c}.ds-input::placeholder{color:#56645a}.ds-input:focus{outline:none;border-color:#2f7a1f;background:#fff}"
+    },
+    {
+      "name": "Service Row",
+      "kind": "custom",
+      "refersTo": "service-row",
+      "description": "Ruled list row: heavy uppercase service, sentence-case sub-line, ink arrow circle.",
+      "html": "<ul class=\"ds-services\"><li><a href=\"#\"><span class=\"ds-svc\">Furniture<small>Couches, chairs, dressers.</small></span><span class=\"ds-go\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 12h13M13 6l6 6-6 6\"/></svg></span></a></li><li><a href=\"#\"><span class=\"ds-svc\">Yard debris<small>Branches, brush, bagged leaves.</small></span><span class=\"ds-go\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 12h13M13 6l6 6-6 6\"/></svg></span></a></li></ul>",
+      "css": ".ds-services{list-style:none;margin:0;padding:0 20px;background:#f1efe6;border-top:2px solid #13241c}.ds-services li{border-bottom:2px solid #13241c}.ds-services a{display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 2px;text-decoration:none;color:#13241c;transition:background-color .25s}.ds-svc{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);flex:1;font-weight:900;text-transform:uppercase;font-size:24px;letter-spacing:-.01em;line-height:1.05;transition:transform .25s cubic-bezier(.2,.9,.3,1)}.ds-svc small{display:block;font-weight:500;text-transform:none;letter-spacing:0;font-size:15px;color:#43574b;margin-top:4px;line-height:1.35}.ds-go{width:40px;height:40px;flex:none;border-radius:50%;background:#13241c;color:#f1efe6;display:grid;place-items:center;transition:transform .25s cubic-bezier(.2,.9,.3,1),background-color .25s}.ds-services a:hover{background:#e6e3d6}.ds-services a:hover .ds-svc{transform:translateX(10px)}.ds-services a:hover .ds-go{transform:translateX(-6px);background:#2f7a1f}.ds-services a:focus-visible{outline:3px solid #2f7a1f;outline-offset:3px}"
+    },
+    {
+      "name": "Quote Card",
+      "kind": "card",
+      "refersTo": "quote-card",
+      "description": "White panel on paper holding the message builder; chat-bubble preview inside.",
+      "html": "<div class=\"ds-paper\"><div class=\"ds-quote\"><h3>Ask for a free estimate</h3><p class=\"ds-sub\">Takes about 30 seconds.</p><p class=\"ds-plabel\">Your message</p><output class=\"ds-preview\">Hi Premier Outdoor Solutions! I'd like a free estimate for furniture. I'll send a photo in the chat.</output></div></div>",
+      "css": ".ds-paper{background:#f1efe6;padding:24px}.ds-quote{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);background:#fff;border-radius:22px;padding:22px 18px;box-shadow:0 18px 40px -20px rgba(19,36,28,.45);color:#13241c}.ds-quote h3{margin:0;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.95;font-size:30px}.ds-sub{margin:8px 0 0;color:#43574b;font-size:16px}.ds-plabel{margin:20px 0 0;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#43574b}.ds-preview{display:block;margin-top:8px;background:#f1efe6;border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:15px;line-height:1.45}"
+    },
+    {
+      "name": "Heavy-Lifting Callout",
+      "kind": "card",
+      "refersTo": "heavy-callout",
+      "description": "Ink block with lime icon under the service list.",
+      "html": "<div class=\"ds-paper\"><div class=\"ds-heavy\"><svg viewBox=\"0 0 48 48\" width=\"44\" height=\"44\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 22h24l-3 18H15z\" opacity=\".35\"/><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"3.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M10 22h28l-3.4 18H13.4zM17 22c0-5 3-9 7-9s7 4 7 9M24 6v3\"/></svg><div><b>Heavy lifting included</b><span>We carry it out. You point.</span></div></div></div>",
+      "css": ":root{--ground:#12261d;--ground-2:#183326;--lime:#6fd43f;--lime-hi:#8be35f;--lime-ink:#0c1f12;--paper:#f1efe6;--paper-2:#e6e3d6;--ink:#13241c;--ink-soft:#43574b;--on-dark:#f4f6f1;--on-dark-soft:#b8cbbd;--leaf-green:#2f7a1f;--radius:14px;--shadow:0 10px 28px -12px rgba(6,20,12,.55);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}.ds-paper{background:#f1efe6;padding:24px}.ds-heavy{font-family:var(--font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);display:flex;gap:14px;align-items:center;background:#13241c;color:#f1efe6;border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}.ds-heavy svg{flex:none;color:#6fd43f}.ds-heavy b{display:block;text-transform:uppercase;font-weight:900;font-size:19px;letter-spacing:-.01em}.ds-heavy span{font-size:15px;color:#b8cbbd}"
+    },
+    {
+      "name": "Seam",
+      "kind": "custom",
+      "refersTo": "seam",
+      "description": "Three speed stripes dividing ground from paper; static snapshot (live version ripples via the seam script).",
+      "html": "<svg class=\"ds-seam\" viewBox=\"0 0 1440 80\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path class=\"f\" d=\"M-20 40 C 360 30 720 52 1080 38 S 1460 42 1460 40 L1460 80 L-20 80Z\"/><path class=\"l1\" d=\"M-20 29 C 360 19 720 41 1080 27 S 1460 31 1460 29\"/><path class=\"l2\" d=\"M-20 40 C 360 30 720 52 1080 38 S 1460 42 1460 40\"/><path class=\"l3\" d=\"M-20 51 C 360 41 720 63 1080 49 S 1460 53 1460 51\"/></svg>",
+      "css": ".ds-seam{display:block;width:100%;height:80px;background:#12261d}.ds-seam path{fill:none;stroke-width:3;vector-effect:non-scaling-stroke;stroke-linecap:round}.ds-seam .f{fill:#f1efe6;stroke:none}.ds-seam .l1{stroke:#6fd43f}.ds-seam .l2{stroke:#f4f6f1;opacity:.55}.ds-seam .l3{stroke:#6fd43f;opacity:.6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Get Your Space Back",
+    "overview": "The page is the job. A heap of hand-drawn junk sits on a deep green ground and physically reacts to a finger or cursor; fling a piece high enough or off a side and it is hauled away with a \"HAULED!\" tag, then replaced. Between the heaps, content sits on a cleared off-white \"floor\". Everything else stays plain and heavy: one lime action color, big white uppercase type, pill buttons, ruled lists.\n\nPhone first and Messenger first. Every surface ends in the lime \"Message for a free estimate\" button, and a sticky copy of it follows the reader on phones whenever no other copy is on screen.",
+    "keyCharacteristics": [
+      "Deep green ground (the logo's black, made non-black), lime as the single action color.",
+      "Heavy (900) uppercase system type with tight negative tracking.",
+      "Physics junk pile with drifting leaves as the signature, top and bottom of the page.",
+      "Section changes marked by the logo's three speed stripes, rippling.",
+      "Soft, downward, green-black shadows; pills and circles, no sharp corners."
+    ],
+    "rules": [
+      {
+        "name": "The Lime Swap Rule",
+        "body": "Lime lives on the green grounds; on paper or white it becomes Leaf Green. The one exception is the lime primary button, which carries its own lime-ink text on any ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Black Rule",
+        "body": "The ground is never black (house rule from PRODUCT.md). Darks are green-tinted.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heavy Caps Rule",
+        "body": "Every h1-h3 is 900 weight, uppercase, -.02em tracking, line-height .95, `text-wrap: balance`. Small text under a heavy title drops to 500 sentence case.",
+        "section": "typography"
+      },
+      {
+        "name": "The Last Line Lime Rule",
+        "body": "Stacked statements color exactly one line or word lime (the payoff), never more.",
+        "section": "typography"
+      },
+      {
+        "name": "The Soft Drop Rule",
+        "body": "Shadows blur and fall down. Never hard-edged, never offset sideways as a graphic device.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** make lime (on dark) or leaf-green (on paper) the only accent in any view, and end each section with the lime Messenger button.",
+      "**Do** set headings in the system stack at 900, uppercase, -.02em, with one lime word or line as the payoff.",
+      "**Do** separate sections with the three-stripe seam, filling with the next section's color.",
+      "**Do** keep tap targets at 44px or taller (chips 44, inputs 52, rows 68, buttons 56).",
+      "**Do** tune the pile through `makePile` config and the seam constants rather than editing the physics.",
+      "**Do** honor `prefers-reduced-motion` with a still, settled frame for anything that moves."
+    ],
+    "donts": [
+      "**Don't** use a black ground; darks are green-tinted (#12261d family).",
+      "**Don't** put lime text or lime strokes on paper or white; swap to leaf-green.",
+      "**Don't** add a second accent color to the UI. Earthy and autumn colors belong to the junk and leaves only.",
+      "**Don't** box services into cards; they are ruled rows with an arrow circle.",
+      "**Don't** use hard-edged or sideways-offset shadows.",
+      "**Don't** let the pile cover text: any section with a pile must reserve `--pile-h` of bottom padding."
+    ]
+  }
+}
