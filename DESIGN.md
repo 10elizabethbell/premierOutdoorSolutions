@@ -55,12 +55,43 @@ typography:
     fontSize: "17px"
     fontWeight: 800
     lineHeight: 1.1
+  roster:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(28px, 8vw, 52px)"
+    fontWeight: 900
+    lineHeight: 1.02
+    letterSpacing: "-0.02em"
+  heading:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(26px, 7.4vw, 44px)"
+    fontWeight: 900
+    lineHeight: 0.95
+    letterSpacing: "-0.02em"
+  card-title:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(26px, 7vw, 36px)"
+    fontWeight: 900
+    lineHeight: 0.95
+    letterSpacing: "-0.02em"
+  promise:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(22px, 6vw, 34px)"
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: "-0.02em"
+  micro:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "13px"
+    fontWeight: 700
+    letterSpacing: "0.06em"
   label:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
     fontSize: "15px"
     fontWeight: 800
     letterSpacing: "0.04em"
 rounded:
+  bubble-tail: "4px"
+  focus: "6px"
   input: "12px"
   card: "14px"
   panel: "22px"
