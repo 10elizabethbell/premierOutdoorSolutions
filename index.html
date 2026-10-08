@@ -75,8 +75,8 @@ p{margin:0}
 .actions{display:grid;gap:12px;margin-top:22px;max-width:440px}
 .reach{margin-top:14px;font-size:15px;color:var(--on-dark-soft);max-width:40ch}
 .reach b{color:var(--on-dark)}
-.hero-logo{display:none}
-.shove{position:absolute;z-index:2;right:16px;bottom:calc(var(--pile-h) - 26px);font-size:13px;font-weight:700;color:var(--lime);letter-spacing:.04em;text-transform:uppercase;pointer-events:none;transition:opacity .6s}
+.hero-logo{display:block;position:absolute;right:16px;bottom:calc(64px - var(--pile-h));width:104px;aspect-ratio:1;z-index:0;box-shadow:0 18px 30px -16px rgba(0,0,0,.7)}
+.shove{position:absolute;z-index:2;left:20px;bottom:calc(var(--pile-h) - 26px);font-size:13px;font-weight:700;color:var(--lime);letter-spacing:.04em;text-transform:uppercase;pointer-events:none;transition:opacity .6s}
 .shove.gone{opacity:0}
 
 /* ============ SEAMS (speed-line dividers) ============ */
@@ -100,12 +100,13 @@ p{margin:0}
 .take-grid{display:grid;gap:36px;margin-top:26px}
 .services{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
 .services li{border-bottom:2px solid var(--ink)}
-.services a{display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 2px;text-decoration:none;transition:padding .25s cubic-bezier(.2,.9,.3,1),background-color .25s}
+.services a{display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 2px;text-decoration:none;transition:background-color .25s}
+.services .svc{transition:transform .25s cubic-bezier(.2,.9,.3,1)}
 .services .svc{flex:1;font-weight:900;text-transform:uppercase;font-size:clamp(20px,5.6vw,28px);letter-spacing:-.01em;line-height:1.05}
 .services .svc small{display:block;font-weight:500;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink-soft);margin-top:4px;line-height:1.35}
 .go{width:40px;height:40px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;transition:transform .25s cubic-bezier(.2,.9,.3,1),background-color .25s}
 .go svg{width:18px;height:18px}
-@media (hover:hover){.services a:hover{padding-left:12px;background:var(--paper-2)}.services a:hover .go{transform:translateX(-6px);background:var(--leaf-green)}}
+@media (hover:hover){.services a:hover{background:var(--paper-2)}.services a:hover .svc{transform:translateX(10px)}.services a:hover .go{transform:translateX(-6px);background:var(--leaf-green)}}
 .services a:active .go{background:var(--leaf-green)}
 .heavy{margin-top:18px;display:flex;gap:14px;align-items:center;background:var(--ink);color:var(--paper);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
 .heavy svg{width:44px;height:44px;flex:none;color:var(--lime)}
@@ -127,7 +128,7 @@ p{margin:0}
 .chip span:active{transform:scale(.96)}
 .q-field{margin-top:20px}
 .q-field input{width:100%;min-height:52px;border-radius:12px;border:2px solid var(--paper-2);background:var(--paper);padding:0 14px;font:500 17px var(--font);color:var(--ink)}
-.q-field input::placeholder{color:#6b7a70}
+.q-field input::placeholder{color:#56645a}
 .q-field input:focus{outline:none;border-color:var(--leaf-green);background:#fff}
 .q-preview{display:block;margin-top:20px;background:var(--paper);border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:15px;line-height:1.45;color:var(--ink);white-space:pre-wrap}
 .q-preview-label{margin-top:20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
@@ -140,14 +141,12 @@ p{margin:0}
 /* ============ HOW IT WORKS ============ */
 .how{background:var(--ground-2);padding:30px 0 34px}
 .how h2{font-size:clamp(38px,10vw,72px)}
-.steps{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:22px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:start}
-.steps .ico{width:56px;height:56px;border-radius:50%;background:var(--ground);display:grid;place-items:center;color:var(--lime);box-shadow:var(--shadow)}
-.steps .ico svg{width:28px;height:28px}
-.steps h3{font-size:22px;line-height:1.05;margin-top:4px}
-.steps p{margin-top:6px;color:var(--on-dark-soft);font-size:16px}
-.promises{margin-top:32px;display:grid;gap:2px}
-.promises p{font-weight:900;text-transform:uppercase;font-size:clamp(30px,8.6vw,56px);letter-spacing:-.02em;line-height:1}
+.steps{margin-top:22px;font-weight:900;text-transform:uppercase;font-size:clamp(30px,8.6vw,64px);line-height:1.02;letter-spacing:-.02em}
+.steps span{display:block}
+.steps span:last-child{color:var(--lime)}
+.steps-note{margin-top:14px;color:var(--on-dark-soft);max-width:44ch}
+.promises{margin-top:34px;padding-top:22px;border-top:3px solid var(--lime);display:grid;gap:2px}
+.promises p{font-weight:800;text-transform:uppercase;font-size:clamp(22px,6vw,34px);letter-spacing:-.02em;line-height:1}
 .promises p:nth-child(2){color:var(--lime)}
 .promises small{display:block;margin-top:12px;color:var(--on-dark-soft);font-size:15px}
 
@@ -185,19 +184,19 @@ footer a{color:var(--lime)}
   .hero{--pile-h:250px}
   .hero-body{padding:46px 32px 0;display:grid;grid-template-columns:1.25fr .75fr;align-items:end;gap:24px}
   .actions{grid-template-columns:auto auto;justify-content:start;max-width:none}
-  .hero-logo{display:block;position:relative;justify-self:center;width:min(30vw,340px);aspect-ratio:1;margin-bottom:calc(-1 * var(--pile-h) + 70px);z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .shove{left:auto;right:16px}
+  .hero-logo{position:relative;right:auto;bottom:auto;justify-self:center;width:min(30vw,340px);aspect-ratio:1;margin-bottom:calc(-1 * var(--pile-h) + 70px);z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
   .seam{height:80px}
   .take{padding:40px 0 64px}
   .take-grid{grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
   .quote{padding:30px 28px;position:sticky;top:24px}
-  .q-actions{grid-template-columns:1fr 1fr}
   .how{padding:40px 0 60px}
-  .steps{grid-template-columns:repeat(3,1fr);gap:32px}
-  .steps li{grid-template-columns:1fr}
   .promises{grid-template-columns:repeat(3,auto);justify-content:start;column-gap:40px}
   .promises small{grid-column:1/-1}
   .close{--pile-h:210px;padding-top:50px}
   .close .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .close .actions{grid-template-columns:1fr;max-width:440px}
+  .btn{white-space:nowrap}
   .bar{display:none}
   footer{padding-bottom:28px}
 }
@@ -210,7 +209,7 @@ THESIS: Junk removal is "get your space back". The page is a heap of junk you ca
 OWN-WORLD: Deep green ground (logo black, made non-black), logo lime as the one action color, white heavy uppercase type, a cleared off-white "floor" for the content. Hand-drawn, solid-shaded junk sprites (boxes, bags, chairs, mattress, tire, lamp, TV, dresser, brush bundles); drifting autumn leaves; dividers are the logo's three speed stripes, rippling.
 STORY: Owner sees their logo, words and services done properly. Customer learns what goes, how it works (send a picture), and messages for a free estimate.
 FIRST VIEWPORT (phone): logo + name bar; "Get your space back."; one-line pitch; full-width Messenger button + "What we take"; contact note; the shove-able pile under the buttons.
-FORM: physics junk pile, choice 1 of 6; runner-up: leaf-blower yard sweep. Seed: pitch-site/unattended (no seed script).
+FORM: physics junk pile, choice 1 of 6; runner-up: leaf-blower yard sweep. Seed: none (pitch-site unattended: roll skipped by design, self-selected; accepted deviation).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 -->
 
@@ -219,8 +218,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 5v13M6 13l6 6 6-6"/></symbol>
   <symbol id="i-cam" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" d="M4 8h3.5L9 5.5h6L16.5 8H20a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" d="M4 5h16v11H10l-5 4v-4H4Z"/><path stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M8 10.5h8"/></symbol>
-  <symbol id="i-truck" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7z"/><circle cx="6" cy="17.5" r="2" fill="currentColor"/><circle cx="17" cy="17.5" r="2" fill="currentColor"/></symbol>
   <symbol id="i-lift" viewBox="0 0 48 48"><path fill="currentColor" d="M12 22h24l-3 18H15z" opacity=".35"/><path fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M10 22h28l-3.4 18H13.4zM17 22c0-5 3-9 7-9s7 4 7 9M24 6v3"/></symbol>
 </svg>
 
@@ -238,7 +235,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <a class="btn btn-primary js-msg" href="https://m.me/61572063225847"><svg aria-hidden="true"><use href="#i-msg"/></svg>Message for a free estimate</a>
         <a class="btn btn-secondary" href="#take"><svg aria-hidden="true"><use href="#i-down"/></svg>What we take</a>
       </div>
-      <p class="reach">Not sure if we take it? <b>Send a picture and we'll let you know.</b> We answer on Facebook Messenger. Phone and text coming soon.</p>
+      <p class="reach">Not sure if we take it? <b>Send a picture and we'll let you know.</b> Estimates go through Facebook Messenger for now.</p>
     </div>
     <div class="logo hero-logo" aria-hidden="true"></div>
   </div>
@@ -257,7 +254,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div class="take-grid">
       <div>
         <ul class="services">
-          <li><a class="js-msg" data-ask="I have furniture I need hauled away." href="https://m.me/61572063225847"><span class="svc">Furniture<small>Couches, chairs, mattresses, dressers.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I have furniture I need hauled away." href="https://m.me/61572063225847"><span class="svc">Furniture<small>Couches, chairs, dressers.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
           <li><a class="js-msg" data-ask="I have household junk I need gone." href="https://m.me/61572063225847"><span class="svc">Household junk<small>The pile you keep stepping around.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
           <li><a class="js-msg" data-ask="I need a cleanout." href="https://m.me/61572063225847"><span class="svc">Cleanouts<small>Rooms, rentals, whole places.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
           <li><a class="js-msg" data-ask="I have yard debris to get rid of." href="https://m.me/61572063225847"><span class="svc">Yard debris<small>Branches, brush, bagged leaves.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
@@ -267,8 +264,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       </div>
 
       <form class="quote" id="quote" novalidate aria-labelledby="quote-h">
-        <h3 id="quote-h">Free estimate in 30 seconds</h3>
-        <p class="sub">Pick what you've got. We'll write the message, you add a photo in Messenger.</p>
+        <h3 id="quote-h">Ask for a free estimate</h3>
+        <p class="sub">Takes about 30 seconds. Pick what you've got, we write the message, you add a photo in Messenger.</p>
         <fieldset class="q-group">
           <legend>What needs to go?</legend>
           <div class="chips">
@@ -309,11 +306,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <section class="how" aria-labelledby="how-h">
   <div class="wrap">
     <h2 id="how-h">How it works</h2>
-    <ol class="steps">
-      <li><span class="ico" aria-hidden="true"><svg><use href="#i-cam"/></svg></span><div><h3>Snap a picture</h3><p>Of the couch, the pile, the whole garage. Whatever's in the way.</p></div></li>
-      <li><span class="ico" aria-hidden="true"><svg><use href="#i-chat"/></svg></span><div><h3>Message us</h3><p>Send it on Messenger. We'll let you know if we take it and give you a free estimate.</p></div></li>
-      <li><span class="ico" aria-hidden="true"><svg><use href="#i-truck"/></svg></span><div><h3>We haul it</h3><p>Pick a time that works for you. We do the lifting and loading.</p></div></li>
-    </ol>
+    <p class="steps"><span>Snap a picture.</span><span>Message us.</span><span>We haul it.</span></p>
+    <p class="steps-note">We tell you if we take it and give you a free estimate. Pick a time that works, and we do the lifting and loading.</p>
     <div class="promises">
       <p>Fair pricing</p><p>Local &amp; reliable</p><p>Flexible scheduling</p>
     </div>
@@ -346,7 +340,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <footer>
   <div class="wrap">
     <p><b>Premier Outdoor Solutions</b> · Junk removal · Middlesex County, NJ area</p>
-    <p>Message us: <a href="https://m.me/61572063225847">Facebook Messenger</a> · <a href="https://www.facebook.com/profile.php?id=61572063225847">Facebook page</a> · Phone coming soon</p>
+    <p>Message us: <a href="https://m.me/61572063225847">Facebook Messenger</a> · <a href="https://www.facebook.com/profile.php?id=61572063225847">Facebook page</a></p>
     <p>Demo one-pager — free sample.</p>
   </div>
 </footer>
@@ -362,7 +356,7 @@ function msgHref(text){ return MSG_URL + (text ? '?text=' + encodeURIComponent(t
 /* Service rows: prefill the Messenger chat with the service named. */
 (function(){
   document.querySelectorAll('.js-msg[data-ask]').forEach(function(a){
-    a.href = msgHref('Hi ' + BIZ + '! ' + a.dataset.ask + ' Can I get a free estimate? (Photo attached.)');
+    a.href = msgHref('Hi ' + BIZ + '! ' + a.dataset.ask + ' Can I get a free estimate? I can send a photo.');
   });
 })();
 
@@ -448,10 +442,10 @@ var Junk = (function(){
   function sprite(type, s, dpr){
     var key = type + '|' + Math.round(s) + '|' + dpr;
     if (cache[key]) return cache[key];
-    var size = Math.ceil(s * 1.15 * dpr), c = document.createElement('canvas'); c.width = c.height = size;
-    var g = c.getContext('2d'); g.translate(size / 2, size / 2); g.scale(dpr, dpr);
-    g.save(); g.fillStyle = 'rgba(4,14,8,.35)'; g.filter = 'blur(' + Math.round(s * .05) + 'px)'; g.translate(s*.04, s*.07); draw[type](g, s); g.restore();
-    draw[type](g, s);
+    var size = Math.ceil(s * 1.35 * dpr), t = document.createElement('canvas'), c = document.createElement('canvas'); t.width = t.height = c.width = c.height = size;
+    var tg = t.getContext('2d'); tg.translate(size / 2, size / 2); tg.scale(dpr, dpr); draw[type](tg, s);
+    var g = c.getContext('2d');   // one soft, offset shadow from the solid shape
+    g.shadowColor = 'rgba(4,14,8,.42)'; g.shadowBlur = s * .08 * dpr; g.shadowOffsetX = s * .04 * dpr; g.shadowOffsetY = s * .07 * dpr; g.drawImage(t, 0, 0);
     return (cache[key] = c);
   }
   function pick(){ return TYPES[(Math.random() * TYPES.length) | 0]; }
@@ -639,7 +633,7 @@ makePile(document.getElementById('pile-close'), { phoneCount: 12, deskCount: 26,
     m += what.length ? ' for ' + list(what) + '.' : '.';
     if (town) m += ' I\'m in ' + town + '.';
     if (when) m += ' Timing: ' + when + '.';
-    m += ' Photo attached.';
+    m += ' I\'ll send a photo in the chat.';
     return m;
   }
   function update(){ var m = compose(); out.textContent = m; send.href = msgHref(m); }
