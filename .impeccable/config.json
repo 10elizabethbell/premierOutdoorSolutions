@@ -1,0 +1,50 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "border-top: 3px",
+        "createdAt": "2026-10-17T18:36:25.749Z",
+        "reason": "agent triage: full-width lime rule above the .promises stack, not a card side accent"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T18:36:25.835Z",
+        "reason": "agent triage: short uppercase display statements (.who, .steps, .promises); heavy uppercase display is Ellie's house style (pitch-site ellie-taste.md §2)"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T18:36:25.930Z",
+        "reason": "agent triage: 0.95–1.02 leading is on uppercase display statements only, body is 1.55"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T18:36:26.032Z",
+        "reason": "agent triage: .services is a ruled list; rows carry 12px vertical padding inside the links"
+      },
+      {
+        "rule": "overused-font",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T18:36:26.132Z",
+        "reason": "agent triage: system font stack is mandated by Ellie's house style (ellie-taste.md §2); Roboto is only the Android system face in that stack"
+      }
+    ]
+  }
+}
