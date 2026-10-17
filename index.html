@@ -89,7 +89,7 @@ p{margin:0}
 .actions{display:grid;gap:12px;margin-top:22px;max-width:440px}
 .reach{margin-top:14px;font-size:15px;color:var(--on-dark-soft);max-width:40ch}
 .reach b{color:var(--on-dark)}
-.hero-logo{display:block;position:absolute;right:16px;bottom:calc(64px - var(--pile-h));width:104px;aspect-ratio:1;z-index:0;box-shadow:0 18px 30px -16px rgba(0,0,0,.7)}
+.hero-logo{display:none}   /* phones: the header logo is enough */
 
 /* ============ SEAMS (speed-line dividers) ============ */
 .seam{display:block;width:100%;height:56px;margin-top:-1px}
@@ -196,7 +196,7 @@ footer a{color:var(--lime);display:inline-block;padding:12px 0}
   .hero{--pile-h:250px}
   .hero-body{padding:46px 32px 0;display:grid;grid-template-columns:1.25fr .75fr;align-items:end;gap:24px}
   .actions{grid-template-columns:auto auto;justify-content:start;max-width:none}
-  .hero-logo{position:relative;right:auto;bottom:auto;justify-self:center;align-self:center;width:min(30vw,340px);aspect-ratio:1;z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .hero-logo{display:block;position:relative;justify-self:center;align-self:center;width:min(30vw,340px);aspect-ratio:1;z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
   .seam{height:80px}
   .take{padding:40px 0 64px}
   .quote{padding:30px 28px}
