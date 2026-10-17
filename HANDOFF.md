@@ -1,6 +1,11 @@
 # Premier Outdoor Solutions — handoff at ~60%
 
-**Live file:** index.html · **Repo:** https://github.com/10elizabethbell/premierOutdoorSolutions · **Built:** 2026-10-08 from Muse brief of 2026-10-08 (FB group post "JUNK REMOVAL — NOW SERVING THE AREA!")
+**Live site:** https://10elizabethbell.github.io/premierOutdoorSolutions/ · **Live file:** index.html · **Repo:** https://github.com/10elizabethbell/premierOutdoorSolutions · **Built:** 2026-10-08 from Muse brief of 2026-10-08 (FB group post "JUNK REMOVAL — NOW SERVING THE AREA!")
+
+## Finishing-rules pass (2026-10-17)
+Brought up to `finishing-rules.md`: removed the sticky phone bar, the "Demo one-pager" line and the header's duplicate Messenger button. The hero now has no services list (headline, their "send a picture" promise, two buttons). Service rows are names only. Every control gets a burnt-orange (`--focus` #c96a12) outline on hover and focus. A touch layer over the pile (`touch-action:none`, no pull-to-refresh) means vertical drags shove junk instead of scrolling. Until first touch a ghost hand sweeps the heap every 5s (`autoplay`, `ghostPush`, `ghostFlick`). Leaves stay in the band over the heap, clear of the text. The canvas no longer rebuilds on same-size resizes. Two-column "What we take" + form only from 1024px. Added a favicon and iPhone icon (the logo's truck), og tags, `og.jpg` (1200x630), a "See more of us on Facebook" link in the close, and customer-care copy in How it works.
+
+**Rules that can't apply yet (no data):** there's no phone number, so nothing goes in the top-right corner and Messenger stays the contact channel instead of text/call. There's no email, so there's no footer email. There are no work photos, so the Facebook link sits in the close (plus the footer) instead of under photos.
 
 ## What's built
 - **World:** "Get your space back." Deep green ground (their logo's black, made non-black), logo lime as the only action color, a cleared off-white "floor" for the content sections. System font, heavy uppercase.

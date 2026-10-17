@@ -44,6 +44,15 @@
         ],
         "createdAt": "2026-10-17T18:36:26.132Z",
         "reason": "agent triage: system font stack is mandated by Ellie's house style (ellie-taste.md §2); Roboto is only the Android system face in that stack"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T20:48:37.092Z",
+        "reason": "agent triage: detector counts only fixed px sizes; display/headline steps are clamp() 30-104px, so the real ramp is wide"
       }
     ]
   }

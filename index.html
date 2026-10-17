@@ -6,6 +6,15 @@
 <title>Premier Outdoor Solutions — Junk Removal, Middlesex County NJ</title>
 <meta name="description" content="Local junk removal in the Middlesex County, NJ area. Furniture, household junk, cleanouts, yard debris, garage and basement cleanouts. Heavy lifting included. Send a picture for a free estimate.">
 <meta name="theme-color" content="#12261d">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Premier Outdoor Solutions — Junk Removal">
+<meta property="og:description" content="Furniture, household junk, cleanouts, yard debris, garage and basement cleanouts. Send us a picture for a free estimate.">
+<meta property="og:url" content="https://10elizabethbell.github.io/premierOutdoorSolutions/">
+<meta property="og:image" content="https://10elizabethbell.github.io/premierOutdoorSolutions/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <style>
 /* ============ TOKENS ============ */
 :root{
@@ -20,7 +29,8 @@
   --ink-soft:#43574b;
   --on-dark:#f4f6f1;
   --on-dark-soft:#b8cbbd;
-  --leaf-green:#2f7a1f;  /* accent on paper (lime fails contrast there) */
+  --leaf-green:#2f7a1f;
+  --focus:#c96a12;       /* one hover/focus outline color for every control (burnt-orange leaf) */  /* accent on paper (lime fails contrast there) */
   --radius:14px;
   --shadow:0 10px 28px -12px rgba(6,20,12,.55);
   --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -29,14 +39,13 @@
 
 /* ============ BASE (phone first) ============ */
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scrollbar-color:var(--lime) var(--ground)}
+html{overscroll-behavior-y:none;-webkit-text-size-adjust:100%;scroll-behavior:smooth;scrollbar-color:var(--lime) var(--ground)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--ground);color:var(--on-dark);font:400 17px/1.55 var(--font);overflow-x:hidden;caret-color:var(--lime)}
 ::selection{background:var(--lime);color:var(--lime-ink)}
 img{max-width:100%;display:block}
 a{color:inherit;text-underline-offset:.2em}
-:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px}
-.paper :focus-visible{outline-color:var(--leaf-green)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
 .wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
 h1,h2,h3{font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.95;margin:0;text-wrap:balance}
 p{margin:0}
@@ -54,17 +63,22 @@ p{margin:0}
   .btn-secondary:hover{background:rgba(111,212,63,.12);transform:translateY(-2px)}
 }
 
+/* hover outlines on every control, same accent as focus */
+@media (hover:hover){.btn:hover,.chip span:hover,.q-field input:hover,.services a:hover{outline:3px solid var(--focus);outline-offset:2px}}
+.services a{border-radius:6px}
+
 /* ============ TOP BAR ============ */
 .top{position:relative;z-index:3;display:flex;align-items:center;gap:12px;padding:14px 20px 0;max-width:1180px;margin:0 auto}
 .logo{background:var(--logo) center/cover;border-radius:50%;flex:none}
 .top .logo{width:46px;height:46px;box-shadow:0 0 0 2px rgba(111,212,63,.5)}
 .top .name{font-weight:900;text-transform:uppercase;font-size:15px;line-height:1.05;letter-spacing:.01em}
-.top .name small{display:block;font-weight:700;color:var(--lime);font-size:13px;letter-spacing:.08em}
-.top .btn{display:none;margin-left:auto;min-height:46px;font-size:15px}
+.top .name small{display:block;font-weight:700;color:var(--lime);font-size:13px;letter-spacing:.03em;white-space:nowrap}
+.top .wide{display:none}
 
 /* ============ HERO ============ */
 .hero{position:relative;overflow:hidden;padding-bottom:var(--pile-h);--pile-h:178px;isolation:isolate}
 .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.pile-touch{position:absolute;left:0;right:0;bottom:0;height:var(--pile-h);z-index:1;touch-action:none}
 .hero-still{position:absolute;left:0;right:0;bottom:0;height:var(--pile-h);z-index:0;background:
   radial-gradient(60% 70% at 50% 100%,rgba(111,212,63,.10),transparent 70%)}
 .hero-body{position:relative;z-index:2;padding:28px 20px 0;max-width:1180px;margin:0 auto}
@@ -124,12 +138,12 @@ p{margin:0}
 .chip input{position:absolute;opacity:0;width:1px;height:1px}
 .chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--paper-2);background:var(--paper);font-weight:700;font-size:15px;cursor:pointer;user-select:none;transition:background-color .15s,border-color .15s,transform .15s}
 .chip input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.chip input:focus-visible+span{outline:3px solid var(--leaf-green);outline-offset:2px}
+.chip input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
 .chip span:active{transform:scale(.96)}
 .q-field{margin-top:20px}
 .q-field input{width:100%;min-height:52px;border-radius:12px;border:2px solid var(--paper-2);background:var(--paper);padding:0 14px;font:500 17px var(--font);color:var(--ink)}
 .q-field input::placeholder{color:#56645a}
-.q-field input:focus{outline:none;border-color:var(--leaf-green);background:#fff}
+.q-field input:focus{outline:3px solid var(--focus);outline-offset:2px;background:#fff}
 .q-preview{display:block;margin-top:20px;background:var(--paper);border-radius:14px 14px 14px 4px;padding:14px 16px;font-size:15px;line-height:1.45;color:var(--ink);white-space:pre-wrap}
 .q-preview-label{margin-top:20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
 .q-preview-label+.q-preview{margin-top:8px}
@@ -162,24 +176,24 @@ p{margin:0}
 .biz h2{font-size:clamp(26px,7.4vw,44px)}
 .biz p{color:var(--on-dark-soft);font-size:15px;margin-top:6px}
 .close .actions{margin-top:22px}
-.area{margin-top:22px;color:var(--on-dark-soft);font-size:17px;max-width:44ch}
+.fb{display:inline-flex;align-items:center;gap:10px;margin-top:22px;min-height:44px;font-weight:800;font-size:17px;color:var(--on-dark);text-decoration:underline;text-decoration-color:var(--lime);text-decoration-thickness:3px;text-underline-offset:.3em}
+.fb svg{width:18px;height:18px;transition:transform .2s}
+@media (hover:hover){.fb:hover{color:var(--lime)}.fb:hover svg{transform:translateX(4px)}}
+.area{margin-top:18px;color:var(--on-dark-soft);font-size:17px;max-width:44ch}
 .area b{color:var(--on-dark)}
 
 /* ============ FOOTER ============ */
-footer{background:var(--ground);border-top:1px solid rgba(184,203,189,.18);padding:22px 0 calc(96px + env(safe-area-inset-bottom));font-size:15px;color:var(--on-dark-soft)}
+footer{background:var(--ground);border-top:1px solid rgba(184,203,189,.18);padding:22px 0 calc(28px + env(safe-area-inset-bottom));font-size:15px;color:var(--on-dark-soft)}
 footer .wrap{display:grid;gap:6px}
 footer b{color:var(--on-dark)}
-footer a{color:var(--lime)}
+footer a{color:var(--lime);display:inline-block;padding:12px 0}
 
-/* ============ STICKY BAR (phones) ============ */
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(18,38,29,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 -10px 24px -14px rgba(0,0,0,.6);transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.9,.3,1)}
-.bar.show{transform:none}
-.bar .btn{width:100%}
 
 /* ============ DESKTOP ============ */
 @media (min-width:760px){
   .top{padding:22px 32px 0}
-  .top .btn{display:flex}
+  .top .wide{display:inline}
+  .top .name small{letter-spacing:.08em}
   .wrap{padding:0 32px}
   .hero{--pile-h:250px}
   .hero-body{padding:46px 32px 0;display:grid;grid-template-columns:1.25fr .75fr;align-items:end;gap:24px}
@@ -188,8 +202,7 @@ footer a{color:var(--lime)}
   .hero-logo{position:relative;right:auto;bottom:auto;justify-self:center;width:min(30vw,340px);aspect-ratio:1;margin-bottom:calc(-1 * var(--pile-h) + 70px);z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
   .seam{height:80px}
   .take{padding:40px 0 64px}
-  .take-grid{grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
-  .quote{padding:30px 28px;position:sticky;top:24px}
+  .quote{padding:30px 28px}
   .how{padding:40px 0 60px}
   .promises{grid-template-columns:repeat(3,auto);justify-content:start;column-gap:40px}
   .promises small{grid-column:1/-1}
@@ -197,10 +210,11 @@ footer a{color:var(--lime)}
   .close .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
   .close .actions{grid-template-columns:1fr;max-width:440px}
   .btn{white-space:nowrap}
-  .bar{display:none}
-  footer{padding-bottom:28px}
 }
-@media (min-width:1100px){.hero h1{font-size:104px}}
+@media (min-width:1024px){
+  .take-grid{grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+  .quote{position:sticky;top:24px}
+}
 </style>
 </head>
 <body>
@@ -208,7 +222,7 @@ footer a{color:var(--lime)}
 THESIS: Junk removal is "get your space back". The page is a heap of junk you can physically shove and fling away; anything thrown far enough gets hauled. Refuses the stock truck-photo hero + icon-card services grid.
 OWN-WORLD: Deep green ground (logo black, made non-black), logo lime as the one action color, white heavy uppercase type, a cleared off-white "floor" for the content. Hand-drawn, solid-shaded junk sprites (boxes, bags, chairs, mattress, tire, lamp, TV, dresser, brush bundles); drifting autumn leaves; dividers are the logo's three speed stripes, rippling.
 STORY: Owner sees their logo, words and services done properly. Customer learns what goes, how it works (send a picture), and messages for a free estimate.
-FIRST VIEWPORT (phone): logo + name bar; "Get your space back."; one-line pitch; full-width Messenger button + "What we take"; contact note; the shove-able pile under the buttons.
+FIRST VIEWPORT (phone): logo + name bar; "Get your space back."; one-line pitch; full-width Messenger button + "What we take"; the shove-able pile (self-shoves until touched) under the buttons.
 FORM: physics junk pile, choice 1 of 6; runner-up: leaf-blower yard sweep. Seed: none (pitch-site unattended: roll skipped by design, self-selected; accepted deviation).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 -->
@@ -224,23 +238,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <header class="hero" id="top">
   <div class="top">
     <div class="logo" role="img" aria-label="Premier Outdoor Solutions junk removal logo"></div>
-    <div class="name">Premier Outdoor Solutions<small>Junk removal</small></div>
-    <a class="btn btn-primary" href="https://m.me/61572063225847"><svg aria-hidden="true"><use href="#i-msg"/></svg>Free estimate</a>
+    <div class="name">Premier Outdoor Solutions<small>Junk removal · Middlesex County<span class="wide">, NJ</span></small></div>
   </div>
   <div class="hero-body">
     <div>
       <h1>Get your <em>space</em> back.</h1>
-      <p class="pitch">Local junk removal around Middlesex County, NJ. <strong>Furniture, cleanouts, yard debris. Heavy lifting included.</strong></p>
+      <p class="pitch">Not sure if we take it? <strong>Send us a picture and we'll let you know.</strong> Heavy lifting included.</p>
       <div class="actions" id="hero-actions">
         <a class="btn btn-primary js-msg" href="https://m.me/61572063225847"><svg aria-hidden="true"><use href="#i-msg"/></svg>Message for a free estimate</a>
         <a class="btn btn-secondary" href="#take"><svg aria-hidden="true"><use href="#i-down"/></svg>What we take</a>
       </div>
-      <p class="reach">Not sure if we take it? <b>Send a picture and we'll let you know.</b> Estimates go through Facebook Messenger for now.</p>
     </div>
     <div class="logo hero-logo" aria-hidden="true"></div>
   </div>
   <div class="hero-still" aria-hidden="true"></div>
   <canvas id="pile-hero" aria-hidden="true"></canvas>
+  <div class="pile-touch" aria-hidden="true"></div>
   <p class="shove" id="shove" aria-hidden="true">Go on, shove it</p>
 </header>
 
@@ -250,22 +263,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <section class="paper take" id="take" aria-labelledby="take-h">
   <div class="wrap">
     <h2 id="take-h">What we take</h2>
-    <p class="lede">For homeowners, landlords, contractors, and anyone who just needs some extra space. Tap one to ask about it.</p>
+    <p class="lede">Tap one to ask us about it.</p>
     <div class="take-grid">
       <div>
         <ul class="services">
-          <li><a class="js-msg" data-ask="I have furniture I need hauled away." href="https://m.me/61572063225847"><span class="svc">Furniture<small>Couches, chairs, dressers.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-          <li><a class="js-msg" data-ask="I have household junk I need gone." href="https://m.me/61572063225847"><span class="svc">Household junk<small>The pile you keep stepping around.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-          <li><a class="js-msg" data-ask="I need a cleanout." href="https://m.me/61572063225847"><span class="svc">Cleanouts<small>Rooms, rentals, whole places.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-          <li><a class="js-msg" data-ask="I have yard debris to get rid of." href="https://m.me/61572063225847"><span class="svc">Yard debris<small>Branches, brush, bagged leaves.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
-          <li><a class="js-msg" data-ask="I need my garage or basement cleaned out." href="https://m.me/61572063225847"><span class="svc">Garage &amp; basement cleanouts<small>Get the car back in. Get the floor back.</small></span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I have furniture I need hauled away." href="https://m.me/61572063225847"><span class="svc">Furniture</span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I have household junk I need gone." href="https://m.me/61572063225847"><span class="svc">Household junk</span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I need a cleanout." href="https://m.me/61572063225847"><span class="svc">Cleanouts</span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I have yard debris to get rid of." href="https://m.me/61572063225847"><span class="svc">Yard debris</span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
+          <li><a class="js-msg" data-ask="I need my garage or basement cleaned out." href="https://m.me/61572063225847"><span class="svc">Garage &amp; basement cleanouts</span><span class="go" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a></li>
         </ul>
         <div class="heavy"><svg aria-hidden="true"><use href="#i-lift"/></svg><div><b>Heavy lifting included</b><span>We carry it out. You point.</span></div></div>
       </div>
 
       <form class="quote" id="quote" novalidate aria-labelledby="quote-h">
         <h3 id="quote-h">Ask for a free estimate</h3>
-        <p class="sub">Takes about 30 seconds. Pick what you've got, we write the message, you add a photo in Messenger.</p>
+        <p class="sub">Pick what you've got. We write the message, you add a photo in Messenger.</p>
         <fieldset class="q-group">
           <legend>What needs to go?</legend>
           <div class="chips">
@@ -307,7 +320,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <div class="wrap">
     <h2 id="how-h">How it works</h2>
     <p class="steps"><span>Snap a picture.</span><span>Message us.</span><span>We haul it.</span></p>
-    <p class="steps-note">We tell you if we take it and give you a free estimate. Pick a time that works, and we do the lifting and loading.</p>
+    <p class="steps-note">We're a new local crew, and we want to earn your next call. We show up when we said we would, do every bit of the lifting ourselves, and keep the price fair.</p>
     <div class="promises">
       <p>Fair pricing</p><p>Local &amp; reliable</p><p>Flexible scheduling</p>
     </div>
@@ -324,16 +337,18 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div>
       <div class="biz">
         <div class="logo" role="img" aria-label="Premier Outdoor Solutions logo"></div>
-        <div><h2 id="close-h">Premier Outdoor Solutions</h2><p>New, local junk removal. We can help.</p></div>
+        <div><h2 id="close-h">Premier Outdoor Solutions</h2><p>New, local, and here to help you get some extra space.</p></div>
       </div>
       <div class="actions" id="close-actions">
         <a class="btn btn-primary js-msg" href="https://m.me/61572063225847"><svg aria-hidden="true"><use href="#i-msg"/></svg>Message for a free estimate</a>
         <a class="btn btn-secondary" href="#quote"><svg aria-hidden="true"><use href="#i-cam"/></svg>Build my message</a>
       </div>
+      <a class="fb" href="https://www.facebook.com/profile.php?id=61572063225847">See more of us on Facebook<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <p class="area"><b>Serving the Middlesex County, NJ area.</b> Not sure if we cover your town? Ask us in the message.</p>
     </div>
   </div>
   <canvas id="pile-close" aria-hidden="true"></canvas>
+  <div class="pile-touch" aria-hidden="true"></div>
 </section>
 </main>
 
@@ -341,11 +356,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <div class="wrap">
     <p><b>Premier Outdoor Solutions</b> · Junk removal · Middlesex County, NJ area</p>
     <p>Message us: <a href="https://m.me/61572063225847">Facebook Messenger</a> · <a href="https://www.facebook.com/profile.php?id=61572063225847">Facebook page</a></p>
-    <p>Demo one-pager — free sample.</p>
   </div>
 </footer>
 
-<div class="bar" id="bar"><a class="btn btn-primary js-msg" href="https://m.me/61572063225847"><svg aria-hidden="true"><use href="#i-msg"/></svg>Message for a free estimate</a></div>
 
 <script>
 /* ============ CONTACT ============ */
@@ -466,7 +479,10 @@ function makePile(canvas, cfg){
     haulHeight: [190, 290],             // fling above this (from floor) = hauled
     respawn: 1.6,                       // seconds before replacement junk drops in
     leaves: [9, 22],                    // drifting yard debris
-    wind: 26                            // leaf drift px/s
+    wind: 26,                           // leaf drift px/s
+    autoplay: 5,                        // seconds between ghost sweeps until first touch (0 = off)
+    ghostPush: .5,                      // how hard the ghost hand shoves sideways
+    ghostFlick: 1500                    // upward flick at the end of each sweep (hauls one or two)
   }, cfg || {});
   var g = canvas.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1);
   var W = 0, H = 0, floor = 0, phone = true, items = [], leaves = [], tags = [], t0 = 0, rect = null;
@@ -478,22 +494,31 @@ function makePile(canvas, cfg){
     return { type: type, s: s, r: s * (type === 'mattress' ? .3 : .4), x: x, y: y, vx: 0, vy: 0,
       a: rand(-.25, .25), va: 0, rest: rand(-.18, .18), home: x, ph: rand(0, 6.28), dead: 0, born: 0 };
   }
+  function leafY(){ return rand(H - (phone ? 150 : 230), H - 40); }   // the band over the heap, clear of the text
   function layout(){
-    var b = canvas.getBoundingClientRect(); W = b.width; H = b.height;
+    var b = canvas.getBoundingClientRect();
+    if (items.length && Math.round(b.width) === Math.round(W) && Math.round(b.height) === Math.round(H)) return;   // address bar resize: keep the scene
+    W = b.width; H = b.height;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     var was = phone; phone = W < 760; floor = H - (phone ? 6 : 10);
     if (items.length && was === phone) return;
     var n = phone ? C.phoneCount : C.deskCount; items = [];
     for (var i = 0; i < n; i++) { var x = (i + .5) / n * W + rand(-12, 12); items.push(newItem(x, floor - rand(20, 160))); }
     leaves = []; var nl = C.leaves[phone ? 0 : 1];
-    for (var k = 0; k < nl; k++) leaves.push({ x: rand(0, W), base: rand(H * .08, H * .9), s: rand(9, 16), ph: rand(0, 6.28), sp: rand(.7, 1.3),
+    for (var k = 0; k < nl; k++) leaves.push({ x: rand(0, W), base: leafY(), s: rand(9, 16), ph: rand(0, 6.28), sp: rand(.7, 1.3),
       ox: 0, oy: 0, vx: 0, vy: 0, spin: 0, c: ['#7fb83a','#a2a83c','#c47e34','#b85a2c','#5c9a2c'][k % 5] });
     for (var s = 0; s < 240; s++) step(1 / 60, 0, true);   // settle before first paint
   }
 
   function step(dt, t, quiet){
     var pr = (phone ? C.pushRadius[0] : C.pushRadius[1]), px = -9999, py = -9999;
+    var pvx = Pointer.vx, pvy = Pointer.vy;
     if (!quiet && Pointer.active && rect) { px = Pointer.x - rect.left; py = Pointer.y - rect.top; }
+    else if (!quiet && !Pointer.moved && C.autoplay) {
+      var cyc = t % C.autoplay, u = cyc / 1.4;   // one sweep every few seconds, ending in a flick
+      if (u < 1) { var e = u * u * (3 - 2 * u); px = W * (.15 + .7 * e); py = floor - 30 - Math.pow(Math.max(0, u - .7) / .3, 2) * 120;
+        pvx = 700 * 6 * u * (1 - u) * C.ghostPush; pvy = u > .85 ? -C.ghostFlick * (u - .85) / .15 : 0; }
+    }
     var haulY = floor - (phone ? C.haulHeight[0] : C.haulHeight[1]);
     for (var i = 0; i < items.length; i++) {
       var b = items[i];
@@ -505,9 +530,9 @@ function makePile(canvas, cfg){
       var dx = b.x - px, dy = b.y - py, d = Math.sqrt(dx * dx + dy * dy);
       if (d < pr + b.r && d > 0.01) {
         var f = 1 - d / (pr + b.r);
-        b.vx += (dx / d) * f * C.pushForce * dt * 10 * .1 + Pointer.vx * f * C.carry * dt * 6;
-        b.vy += (dy / d) * f * C.pushForce * dt * 10 * .1 + Pointer.vy * f * C.carry * dt * 6;
-        b.va += (Pointer.vx * f) * .0006;
+        b.vx += (dx / d) * f * C.pushForce * dt * 10 * .1 + pvx * f * C.carry * dt * 6;
+        b.vy += (dy / d) * f * C.pushForce * dt * 10 * .1 + pvy * f * C.carry * dt * 6;
+        b.va += (pvx * f) * .0006;
       }
       if (Math.abs(b.x - b.home) > 30 && b.y > floor - 200) b.vx += (b.home - b.x) * .9 * dt;
       b.vx *= Math.pow(.6, dt); b.vy *= Math.pow(.8, dt);
@@ -546,10 +571,10 @@ function makePile(canvas, cfg){
       L.x += (C.wind * L.sp + Math.sin(t * .6 + L.ph) * 16) * dt;
       var lx = L.x + L.ox, ly = L.base + Math.sin(t * .9 * L.sp + L.ph) * 18 + Math.sin(t * .37 + L.ph * 1.7) * 26 + L.oy;
       var ddx = lx - px, ddy = ly - py, dl = Math.sqrt(ddx * ddx + ddy * ddy);
-      if (dl < pr * 1.3 && dl > .01) { var fl = 1 - dl / (pr * 1.3); L.vx += (ddx / dl) * fl * 900 * dt + Pointer.vx * fl * .5 * dt * 6; L.vy += (ddy / dl) * fl * 900 * dt + Pointer.vy * fl * .5 * dt * 6; L.spin += fl * 10 * dt * (ddx > 0 ? 1 : -1); }
+      if (dl < pr * 1.3 && dl > .01) { var fl = 1 - dl / (pr * 1.3); L.vx += (ddx / dl) * fl * 900 * dt + pvx * fl * .5 * dt * 6; L.vy += (ddy / dl) * fl * 900 * dt + pvy * fl * .5 * dt * 6; L.spin += fl * 10 * dt * (ddx > 0 ? 1 : -1); }
       L.vx += -L.ox * 3 * dt; L.vy += -L.oy * 3 * dt; L.vx *= Math.pow(.15, dt); L.vy *= Math.pow(.15, dt);
       L.ox += L.vx * dt; L.oy += L.vy * dt; L.spin *= Math.pow(.3, dt);
-      if (L.x > W + 30) { L.x = -30; L.base = rand(H * .08, H * .9); }
+      if (L.x > W + 30) { L.x = -30; L.base = leafY(); }
     }
   }
 
@@ -649,14 +674,6 @@ makePile(document.getElementById('pile-close'), { phoneCount: 12, deskCount: 26,
   update();
 })();
 
-/* ============ STICKY BAR ============ */
-/* Shows once the hero's buttons scroll away; hides while the closing buttons are on screen. */
-(function(){
-  var bar = document.getElementById('bar'), seen = { hero: true, close: false, quote: false };
-  function set(){ bar.classList.toggle('show', !seen.hero && !seen.close && !seen.quote); }
-  function watch(id, key){ new IntersectionObserver(function(es){ seen[key] = es[0].isIntersecting; set(); }).observe(document.getElementById(id)); }
-  watch('hero-actions', 'hero'); watch('close-actions', 'close'); watch('q-send', 'quote');
-})();
 </script>
 </body>
 </html>
