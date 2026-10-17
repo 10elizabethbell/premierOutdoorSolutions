@@ -90,8 +90,6 @@ p{margin:0}
 .reach{margin-top:14px;font-size:15px;color:var(--on-dark-soft);max-width:40ch}
 .reach b{color:var(--on-dark)}
 .hero-logo{display:block;position:absolute;right:16px;bottom:calc(64px - var(--pile-h));width:104px;aspect-ratio:1;z-index:0;box-shadow:0 18px 30px -16px rgba(0,0,0,.7)}
-.shove{position:absolute;z-index:2;left:20px;bottom:calc(var(--pile-h) - 26px);font-size:13px;font-weight:700;color:var(--lime);letter-spacing:.04em;text-transform:uppercase;pointer-events:none;transition:opacity .6s}
-.shove.gone{opacity:0}
 
 /* ============ SEAMS (speed-line dividers) ============ */
 .seam{display:block;width:100%;height:56px;margin-top:-1px}
@@ -198,7 +196,6 @@ footer a{color:var(--lime);display:inline-block;padding:12px 0}
   .hero{--pile-h:250px}
   .hero-body{padding:46px 32px 0;display:grid;grid-template-columns:1.25fr .75fr;align-items:end;gap:24px}
   .actions{grid-template-columns:auto auto;justify-content:start;max-width:none}
-  .shove{left:auto;right:16px}
   .hero-logo{position:relative;right:auto;bottom:auto;justify-self:center;align-self:center;width:min(30vw,340px);aspect-ratio:1;z-index:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
   .seam{height:80px}
   .take{padding:40px 0 64px}
@@ -254,7 +251,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <div class="hero-still" aria-hidden="true"></div>
   <canvas id="pile-hero" aria-hidden="true"></canvas>
   <div class="pile-touch" aria-hidden="true"></div>
-  <p class="shove" id="shove" aria-hidden="true">Go on, shove it</p>
 </header>
 
 <svg class="seam to-paper" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path class="fill"/><path class="l1"/><path class="l2"/><path class="l3"/></svg>
@@ -545,7 +541,6 @@ function makePile(canvas, cfg){
       if (!quiet && ((b.y < haulY && b.vy < -300) || b.x < -b.r * .2 || b.x > W + b.r * .2)) {
         b.dead = .001; b.vy = Math.min(b.vy, -500);
         tags.push({ x: Math.max(40, Math.min(W - 40, b.x)), y: Math.max(30, b.y), t: 0 });
-        var hint = document.getElementById('shove'); if (hint) hint.classList.add('gone');
       }
     }
     // collisions: soft circles, a few passes
