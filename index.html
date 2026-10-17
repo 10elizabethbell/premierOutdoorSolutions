@@ -492,7 +492,8 @@ function makePile(canvas, cfg){
     var sz = phone ? C.phoneSize : C.deskSize, s = rand(sz[0], sz[1]), type = Junk.pick();
     if (type === 'mattress' || type === 'brush') s *= 1.25;
     return { type: type, s: s, r: s * (type === 'mattress' ? .3 : .4), x: x, y: y, vx: 0, vy: 0,
-      a: rand(-.25, .25), va: 0, rest: rand(-.18, .18), home: x, ph: rand(0, 6.28), dead: 0, born: 0 };
+      a: rand(-.18, .18), va: 0,   // each piece keeps its own slight tilt; furniture never spins
+      home: x, ph: rand(0, 6.28), dead: 0, born: 0 };
   }
   function leafY(){ return rand(H - (phone ? 150 : 230), H - 40); }   // the band over the heap, clear of the text
   function layout(){
@@ -522,7 +523,7 @@ function makePile(canvas, cfg){
     var haulY = floor - (phone ? C.haulHeight[0] : C.haulHeight[1]);
     for (var i = 0; i < items.length; i++) {
       var b = items[i];
-      if (b.dead) { b.dead += dt; b.x += b.vx * dt; b.y += b.vy * dt; b.a += b.va * dt;
+      if (b.dead) { b.dead += dt; b.x += b.vx * dt; b.y += b.vy * dt;
         if (b.dead > C.respawn) { items[i] = newItem(rand(W * .05, W * .95), floor - (phone ? 150 : 240)); items[i].home = b.home; items[i].born = .001; }
         continue; }
       if (b.born) b.born += dt;
@@ -532,19 +533,17 @@ function makePile(canvas, cfg){
         var f = 1 - d / (pr + b.r);
         b.vx += (dx / d) * f * C.pushForce * dt * 10 * .1 + pvx * f * C.carry * dt * 6;
         b.vy += (dy / d) * f * C.pushForce * dt * 10 * .1 + pvy * f * C.carry * dt * 6;
-        b.va += (pvx * f) * .0006;
       }
       if (Math.abs(b.x - b.home) > 30 && b.y > floor - 200) b.vx += (b.home - b.x) * .9 * dt;
       b.vx *= Math.pow(.6, dt); b.vy *= Math.pow(.8, dt);
       b.x += b.vx * dt; b.y += b.vy * dt;
       if (b.y + b.r > floor) { b.y = floor - b.r; if (b.vy > 0) b.vy *= -.15; b.vx *= Math.pow(.02, dt); }
-      b.va += (b.rest - b.a) * 18 * dt + b.vx * .002 * dt * 60 * .05; b.va *= Math.pow(.05, dt); b.a += b.va * dt;
       // hauled: flung high and still rising, or shoved off a side
       // side walls hold the heap unless something is shoved out hard
       if (b.x < b.r * .6 && b.vx > -350) { b.x = b.r * .6; b.vx = Math.abs(b.vx) * .2; }
       if (b.x > W - b.r * .6 && b.vx < 350) { b.x = W - b.r * .6; b.vx = -Math.abs(b.vx) * .2; }
       if (!quiet && ((b.y < haulY && b.vy < -300) || b.x < -b.r * .2 || b.x > W + b.r * .2)) {
-        b.dead = .001; b.va = rand(-6, 6); b.vy = Math.min(b.vy, -500);
+        b.dead = .001; b.vy = Math.min(b.vy, -500);
         tags.push({ x: Math.max(40, Math.min(W - 40, b.x)), y: Math.max(30, b.y), t: 0 });
         var hint = document.getElementById('shove'); if (hint) hint.classList.add('gone');
       }
@@ -561,7 +560,7 @@ function makePile(canvas, cfg){
         A.x -= nx * ov * sa; A.y -= ny * ov * sa; B.x += nx * ov * sb; B.y += ny * ov * sb;
         var vn = (B.vx - A.vx) * nx + (B.vy - A.vy) * ny;
         if (vn < 0) { var j = -1.1 * vn; A.vx -= nx * j * sa; A.vy -= ny * j * sa; B.vx += nx * j * sb; B.vy += ny * j * sb;
-          var tg = (B.vx - A.vx) * -ny + (B.vy - A.vy) * nx; A.va += tg * .004; B.va -= tg * .004; }
+          }
       }
     }
     if (quiet) return;
