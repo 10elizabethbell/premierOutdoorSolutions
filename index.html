@@ -476,7 +476,8 @@ function makePile(canvas, cfg){
     wind: 26,                           // leaf drift px/s
     autoplay: 5,                        // seconds between ghost sweeps until first touch (0 = off)
     ghostPush: .5,                      // how hard the ghost hand shoves sideways
-    ghostFlick: 1500                    // upward flick at the end of each sweep (hauls one or two)
+    ghostFlick: 1500,                   // upward flick at the end of each sweep (hauls one or two)
+    crew: null                          // hero only: worker + truck config (see the makePile call)
   }, cfg || {});
   var g = canvas.getContext('2d'), dpr = Math.min(2, window.devicePixelRatio || 1);
   var W = 0, H = 0, floor = 0, phone = true, items = [], leaves = [], tags = [], t0 = 0, rect = null;
@@ -489,6 +490,164 @@ function makePile(canvas, cfg){
       a: rand(-.18, .18), va: 0,   // each piece keeps its own slight tilt; furniture never spins
       home: x, ph: rand(0, 6.28), dead: 0, born: 0 };
   }
+  /* ---- crew: a worker carries junk from the pile to the truck; a full truck drives off and backs in empty ---- */
+  var Q = C.crew, U = 1, WR = 0, CABW = 0, BL = 0, BH = 0, truckLen = 0, clearEnd = 0, dropX = 0,
+      truck = { x: 0, st: 'parked', t: 0, spin: 0, from: 0 }, man = null, load = [], cols = [], refill = [];
+  function geo(){
+    if (!Q) { clearEnd = 0; return; }
+    U = phone ? Q.scale[0] : Q.scale[1];
+    WR = 13 * U; CABW = 62 * U; BL = 172 * U; BH = 32 * U; truckLen = CABW + 6 * U + BL;
+    clearEnd = 12 + truckLen + (phone ? Q.gap[0] : Q.gap[1]) * U;
+    dropX = 12 + truckLen + 12 * U * Q.person;
+    cols = []; for (var i = 0; i < Math.max(1, Math.floor(BL / (10 * U))); i++) cols.push(0);
+    load = []; truck = { x: 0, st: 'parked', t: 0, spin: 0, from: 0 };
+    man = { x: clearEnd - 10 * U, dir: 1, st: 'idle', t: .8, ph: 0, bend: 0, lift: 1, item: null, from: null, tgt: null, moving: false };
+    for (i = 0; i < 2; i++) { var it = { type: Junk.pick(), s: (phone ? C.phoneSize[1] : C.deskSize[1]) * .8 }; place(it); it.st = 'in'; load.push(it); }
+  }
+  function pileX(){ return rand(clearEnd + 16, W - 16); }
+  function bedX(){ return 12 + truck.x + CABW + 6 * U; }
+  function bedFloor(){ return floor - 2 * WR - 2 * U; }
+  function place(it){   // a spot in the bed: the lowest columns of a little heightmap
+    it.bs = it.s * Q.bed; var br = it.bs * .4, bw = 10 * U, span = Math.max(1, Math.min(cols.length, Math.round(br * 1.8 / bw))), best = 0, bh = 1e9, i, j, m;
+    for (i = 0; i + span <= cols.length; i++) { m = 0; for (j = i; j < i + span; j++) m = Math.max(m, cols[j]); m += Math.random() * 5 * U; if (m < bh) { bh = m; best = i; } }
+    var top = 0; for (j = best; j < best + span; j++) top = Math.max(top, cols[j]);
+    it.lx = Math.max(br, Math.min(BL - br, (best + span / 2) * bw)); it.ly = -top - br;
+    for (j = best; j < best + span; j++) cols[j] = top + br * 1.5;
+  }
+  function full(){ return load.length >= (phone ? Q.load[0] : Q.load[1]); }
+  function handsY(){ return floor - 47 * U * Q.person; }
+  function pickTarget(){
+    var best = null;
+    for (var i = 0; i < items.length; i++) { var b = items[i]; if (b.dead || (b.born && b.born < .5)) continue; if (!best || b.x < best.x) best = b; }
+    return best;
+  }
+  function crewStep(dt){
+    var i, it, k;
+    if (truck.st === 'parked') {
+      var flying = false; for (i = 0; i < load.length; i++) if (load[i].st === 'toss') flying = true;
+      if (full() && !flying && man.st !== 'toss') { truck.st = 'leave'; truck.t = 0; }
+    } else if (truck.st === 'leave') {
+      truck.t += dt; var nx = -.5 * 300 * U * truck.t * truck.t; truck.spin += (nx - truck.x) / WR; truck.x = nx;
+      if (12 + truck.x + truckLen < -20) { truck.st = 'away'; truck.t = 0; load = []; for (i = 0; i < cols.length; i++) cols[i] = 0; }
+    } else if (truck.st === 'away') {
+      truck.t += dt; if (truck.t > Q.away) { truck.st = 'back'; truck.t = 0; truck.from = truck.x; }
+    } else {
+      truck.t += dt; k = Math.min(1, truck.t / 2.4); var bx = truck.from * Math.pow(1 - k, 3);
+      truck.spin += (bx - truck.x) / WR; truck.x = bx; if (k >= 1) { truck.st = 'parked'; truck.x = 0; }
+    }
+    var spd = Q.walk * U; man.moving = false;
+    function walkTo(x){ var d = x - man.x; if (Math.abs(d) < 1.5) { man.x = x; return true; } man.dir = d < 0 ? -1 : 1; man.x += man.dir * Math.min(Math.abs(d), spd * dt); man.ph += dt * 11; man.moving = true; return false; }
+    switch (man.st) {
+      case 'idle':
+        man.t -= dt; man.bend = Math.max(0, man.bend - dt * 4);
+        if (man.t <= 0) { if (truck.st === 'parked' && !full()) { man.tgt = pickTarget(); if (man.tgt) man.st = 'fetch'; else man.t = .5; } else man.t = .3; }
+        break;
+      case 'fetch':
+        if (man.tgt.dead || items.indexOf(man.tgt) < 0) { man.st = 'idle'; man.t = .15; break; }
+        if (walkTo(man.tgt.x - man.tgt.r * .8 - 6 * U)) { man.st = 'pick'; man.t = 0; man.dir = 1; }
+        break;
+      case 'pick':
+        man.t += dt;
+        if (man.t < .3) man.bend = Math.min(1, man.t / .3);
+        else {
+          if (!man.item) {
+            var b = man.tgt, at = items.indexOf(b);
+            if (at < 0 || b.dead) { man.st = 'idle'; man.t = .2; break; }
+            items.splice(at, 1); man.item = { type: b.type, s: b.s, a: b.a }; man.from = { x: b.x, y: b.y }; man.lift = 0;
+            refill.push(rand(.4, 1.1));   // fresh junk drops in on the right
+          }
+          man.bend = Math.max(0, 1 - (man.t - .3) / .3); man.lift = Math.min(1, (man.t - .3) / .3);
+          if (man.t > .62) man.st = 'carry';
+        }
+        break;
+      case 'carry':
+        if (walkTo(dropX)) { man.dir = -1; if (truck.st === 'parked') { man.st = 'toss'; man.t = 0; } }
+        break;
+      case 'toss':
+        man.t += dt;
+        if (man.t > .22 && man.item) { it = man.item; man.item = null; place(it); it.st = 'toss'; it.t = 0; it.sx = man.x - 6 * U * Q.person; it.sy = handsY() - it.bs * .45; load.push(it); }
+        if (man.t > .5) { man.st = 'idle'; man.t = .15 + Math.random() * .4; }
+        break;
+    }
+    for (i = 0; i < load.length; i++) { it = load[i]; if (it.st === 'toss') { it.t += dt / .45; if (it.t >= 1) { it.t = 1; it.st = 'in'; } } }
+    for (i = refill.length - 1; i >= 0; i--) { refill[i] -= dt; if (refill[i] <= 0) { refill.splice(i, 1);
+      var x = rand(clearEnd + (W - clearEnd) * .5, W - 20), n = newItem(x, floor - (phone ? 150 : 240)); n.born = .001; items.push(n); } }
+  }
+  function wheel(x, y, spin){
+    g.fillStyle = '#121715'; g.beginPath(); g.arc(x, y, WR, 0, 6.283); g.fill();
+    g.fillStyle = '#9aa39f'; g.beginPath(); g.arc(x, y, WR * .5, 0, 6.283); g.fill();
+    g.strokeStyle = '#5c6562'; g.lineWidth = 1.6 * U;
+    for (var k = 0; k < 3; k++) { var a = spin + k * 2.094; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * WR * .48, y + Math.sin(a) * WR * .48); g.stroke(); }
+  }
+  function vg(y0, y1, a, b){ var gr = g.createLinearGradient(0, y0, 0, y1); gr.addColorStop(0, a); gr.addColorStop(1, b); return gr; }
+  function drawLoad(){
+    var bx = bedX(), bf = bedFloor(), wallTop = bf - BH;
+    for (var i = 0; i < load.length; i++) {
+      var it = load[i], hx = bx + it.lx, hy = bf + it.ly, x = hx, y = hy;
+      if (it.st === 'toss') { var k = it.t, arc = Math.max(30 * U, Math.max(it.sy, hy) - (wallTop - it.bs * .6)); x = it.sx + (hx - it.sx) * k; y = it.sy + (hy - it.sy) * k - Math.sin(k * Math.PI) * arc; }
+      var sp = Junk.sprite(it.type, it.bs, dpr), w = sp.width / dpr;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1; g.drawImage(sp, x - w / 2, y - w / 2, w, w);
+    }
+  }
+  function drawTruck(){   // the white truck with the dark dump body from their logo, facing left
+    var tx = 12 + truck.x, u = U, gy = floor, top = gy - WR - 66 * u, bx = bedX(), bf = bedFloor(), wt = bf - BH;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
+    g.fillStyle = 'rgba(2,10,6,.4)'; g.beginPath(); g.ellipse(tx + truckLen / 2, gy - 1, truckLen * .55, 5 * u, 0, 0, 6.283); g.fill();
+    g.fillStyle = '#1a201e'; g.fillRect(tx + 6 * u, gy - 2 * WR - 2 * u, truckLen - 8 * u, 8 * u);   // chassis
+    drawLoad(); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.fillStyle = vg(wt, bf, '#2e3834', '#121816'); g.fillRect(bx, wt, BL, BH);   // dump body
+    g.fillStyle = '#39443f'; for (var x = bx + 10 * u; x < bx + BL - 6 * u; x += 26 * u) g.fillRect(x, wt, 3.5 * u, BH);
+    g.fillStyle = '#46524d'; g.fillRect(bx - 2 * u, wt - 3 * u, BL + 4 * u, 5 * u);
+    g.fillStyle = '#6fd43f'; g.fillRect(bx, wt + BH * .66, BL, 3.2 * u); g.fillRect(bx, wt + BH * .66 + 6 * u, BL * .7, 2.4 * u);
+    g.fillStyle = '#d23a3f'; g.fillRect(bx + BL - 4 * u, bf - 14 * u, 4 * u, 7 * u);
+    g.fillStyle = vg(top, gy - WR, '#ffffff', '#c3ccc7');   // cab
+    g.beginPath(); g.moveTo(tx, gy - WR + 2 * u); g.lineTo(tx, top + 30 * u); g.quadraticCurveTo(tx, top + 26 * u, tx + 5 * u, top + 25 * u); g.lineTo(tx + 17 * u, top + 23 * u);
+    g.lineTo(tx + 22 * u, top + 4 * u); g.quadraticCurveTo(tx + 23 * u, top, tx + 28 * u, top); g.lineTo(tx + CABW - 3 * u, top); g.quadraticCurveTo(tx + CABW, top, tx + CABW, top + 3 * u);
+    g.lineTo(tx + CABW, gy - WR + 2 * u); g.closePath(); g.fill();
+    g.fillStyle = vg(top + 5 * u, top + 22 * u, '#5d7069', '#1f2925');
+    g.beginPath(); g.moveTo(tx + 24 * u, top + 6 * u); g.lineTo(tx + CABW - 7 * u, top + 6 * u); g.lineTo(tx + CABW - 7 * u, top + 22 * u); g.lineTo(tx + 20 * u, top + 22 * u); g.closePath(); g.fill();
+    g.fillStyle = '#c3ccc7'; g.fillRect(tx + 38 * u, top + 6 * u, 2.5 * u, 16 * u);
+    g.fillStyle = '#2a332f'; g.fillRect(tx + 1 * u, top + 30 * u, 7 * u, 18 * u);
+    g.fillStyle = '#4a5550'; for (var k = 0; k < 4; k++) g.fillRect(tx + 1 * u, top + 33 * u + k * 4 * u, 7 * u, 1.4 * u);
+    g.fillStyle = '#fff3cf'; g.fillRect(tx, top + 26 * u, 4 * u, 4 * u);
+    g.fillStyle = '#6fd43f'; g.fillRect(tx + 9 * u, top + 38 * u, CABW - 9 * u, 3.2 * u);
+    g.fillStyle = '#8f9893'; g.fillRect(tx - 3 * u, gy - WR - 4 * u, 14 * u, 6 * u);
+    g.fillStyle = '#0e1311';
+    [tx + 18 * u, bx + BL * .3, bx + BL * .76].forEach(function(wx){ g.beginPath(); g.arc(wx, gy - WR, WR + 3 * u, Math.PI, 0); g.fill(); });
+    wheel(tx + 18 * u, gy - WR, -truck.spin); wheel(bx + BL * .3, gy - WR, -truck.spin); wheel(bx + BL * .76, gy - WR, -truck.spin);
+  }
+  function drawMan(){
+    var u = U * Q.person, m = man, f = m.dir, gy = floor; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1; g.lineCap = 'round'; g.lineJoin = 'round';
+    var sw = m.moving ? Math.sin(m.ph) : 0, bob = m.moving ? Math.abs(Math.cos(m.ph)) * 1.4 * u : 0;
+    var hipX = m.x, hipY = gy - 20 * u - bob + m.bend * 4 * u;
+    g.fillStyle = 'rgba(2,10,6,.4)'; g.beginPath(); g.ellipse(m.x, gy - 1, 9 * u, 2.4 * u, 0, 0, 6.283); g.fill();
+    g.strokeStyle = '#33403a'; g.lineWidth = 5 * u;
+    function leg(sg){
+      var fx = hipX + sg * 7 * u, kx = hipX + sg * 3.5 * u + f * m.bend * 4 * u;
+      g.beginPath(); g.moveTo(hipX, hipY); g.lineTo(kx, hipY + 10 * u - m.bend * 2 * u); g.lineTo(fx, gy - 2.5 * u); g.stroke();
+      g.fillStyle = '#121715'; g.fillRect(fx - 3 * u + f * 1.5 * u, gy - 4 * u, 6.5 * u, 4 * u);
+    }
+    leg(sw); leg(-sw);
+    var ta = m.bend * 1.1 * f, sx = hipX + Math.sin(ta) * 17 * u, sy = hipY - Math.cos(ta) * 17 * u;
+    g.strokeStyle = '#6fd43f'; g.lineWidth = 9.5 * u; g.beginPath(); g.moveTo(hipX, hipY); g.lineTo(sx, sy); g.stroke();
+    var hx = sx + Math.sin(ta) * 6.5 * u, hy = sy - Math.cos(ta) * 6.5 * u;
+    g.fillStyle = '#c99470'; g.beginPath(); g.arc(hx, hy, 4.6 * u, 0, 6.283); g.fill();
+    g.fillStyle = '#e9ede6'; g.beginPath(); g.arc(hx, hy - .8 * u, 4.9 * u, Math.PI, 0); g.fill(); g.fillRect(f > 0 ? hx : hx - 8 * u, hy - 1.6 * u, 8 * u, 1.9 * u);
+    var handX = null, handY = 0, k;
+    if (m.item) { var up = m.lift; handX = sx + f * 2 * u; handY = sy + (1 - up) * 13 * u - up * 11 * u; }
+    else if (m.st === 'toss') { k = Math.min(1, m.t / .22); handX = sx + f * (2 + k * 6) * u; handY = sy - 11 * u - k * 3 * u; }
+    else if (m.bend > .05) { handX = sx + f * 6 * u; handY = sy + 13 * u; }
+    if (m.item) {
+      var sc = 1 + (Q.bed - 1) * m.lift, sz = m.item.s * sc, ix = handX, iy = handY - sz * .45;
+      if (m.from && m.lift < 1) { ix = m.from.x + (ix - m.from.x) * m.lift; iy = m.from.y + (iy - m.from.y) * m.lift; }
+      var sp = Junk.sprite(m.item.type, m.item.s, dpr), w = sp.width / dpr * sc;
+      g.save(); g.translate(ix, iy); g.rotate(m.item.a * (1 - m.lift)); g.drawImage(sp, -w / 2, -w / 2, w, w); g.restore();
+    }
+    g.strokeStyle = '#c99470'; g.lineWidth = 3.4 * u;
+    if (handX !== null) { g.beginPath(); g.moveTo(sx - 1.5 * u, sy + 1 * u); g.lineTo(handX - 1.5 * u, handY); g.moveTo(sx + 1.5 * u, sy + 1 * u); g.lineTo(handX + 1.5 * u, handY); g.stroke(); }
+    else { g.beginPath(); g.moveTo(sx, sy + 1 * u); g.lineTo(sx + sw * 5 * u, sy + 14 * u); g.moveTo(sx, sy + 1 * u); g.lineTo(sx - sw * 5 * u, sy + 14 * u); g.stroke(); }
+  }
+
   function leafY(){ return rand(H - (phone ? 150 : 230), H - 40); }   // the band over the heap, clear of the text
   function layout(){
     var b = canvas.getBoundingClientRect();
@@ -496,9 +655,10 @@ function makePile(canvas, cfg){
     W = b.width; H = b.height;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     var was = phone; phone = W < 760; floor = H - (phone ? 6 : 10);
-    if (items.length && was === phone) return;
+    geo();
+    if (items.length && was === phone) { items.forEach(function(b){ if (b.home < clearEnd + 16) b.home = pileX(); }); return; }
     var n = phone ? C.phoneCount : C.deskCount; items = [];
-    for (var i = 0; i < n; i++) { var x = (i + .5) / n * W + rand(-12, 12); items.push(newItem(x, floor - rand(20, 160))); }
+    for (var i = 0; i < n; i++) { var x = clearEnd + (i + .5) / n * (W - clearEnd) + rand(-12, 12); items.push(newItem(x, floor - rand(20, 160))); }
     leaves = []; var nl = C.leaves[phone ? 0 : 1];
     for (var k = 0; k < nl; k++) leaves.push({ x: rand(0, W), base: leafY(), s: rand(9, 16), ph: rand(0, 6.28), sp: rand(.7, 1.3),
       ox: 0, oy: 0, vx: 0, vy: 0, spin: 0, c: ['#7fb83a','#a2a83c','#c47e34','#b85a2c','#5c9a2c'][k % 5] });
@@ -518,7 +678,7 @@ function makePile(canvas, cfg){
     for (var i = 0; i < items.length; i++) {
       var b = items[i];
       if (b.dead) { b.dead += dt; b.x += b.vx * dt; b.y += b.vy * dt;
-        if (b.dead > C.respawn) { items[i] = newItem(rand(W * .05, W * .95), floor - (phone ? 150 : 240)); items[i].home = b.home; items[i].born = .001; }
+        if (b.dead > C.respawn) { items[i] = newItem(pileX(), floor - (phone ? 150 : 240)); items[i].born = .001; }
         continue; }
       if (b.born) b.born += dt;
       b.vy += C.gravity * dt;
@@ -528,13 +688,14 @@ function makePile(canvas, cfg){
         b.vx += (dx / d) * f * C.pushForce * dt * 10 * .1 + pvx * f * C.carry * dt * 6;
         b.vy += (dy / d) * f * C.pushForce * dt * 10 * .1 + pvy * f * C.carry * dt * 6;
       }
-      if (Math.abs(b.x - b.home) > 30 && b.y > floor - 200) b.vx += (b.home - b.x) * .9 * dt;
+      if (!b.out && Math.abs(b.x - b.home) > 30 && b.y > floor - 200) b.vx += (b.home - b.x) * .9 * dt;
       b.vx *= Math.pow(.6, dt); b.vy *= Math.pow(.8, dt);
       b.x += b.vx * dt; b.y += b.vy * dt;
       if (b.y + b.r > floor) { b.y = floor - b.r; if (b.vy > 0) b.vy *= -.15; b.vx *= Math.pow(.02, dt); }
       // hauled: flung high and still rising, or shoved off a side
       // side walls hold the heap unless something is shoved out hard
-      if (b.x < b.r * .6 && b.vx > -350) { b.x = b.r * .6; b.vx = Math.abs(b.vx) * .2; }
+      var lw = clearEnd + b.r * .6;
+      if (!b.out && b.x < lw) { if (b.vx > -350 || !clearEnd) { b.x = lw; b.vx = Math.abs(b.vx) * .2; } else b.out = true; }
       if (b.x > W - b.r * .6 && b.vx < 350) { b.x = W - b.r * .6; b.vx = -Math.abs(b.vx) * .2; }
       if (!quiet && ((b.y < haulY && b.vy < -300) || b.x < -b.r * .2 || b.x > W + b.r * .2)) {
         b.dead = .001; b.vy = Math.min(b.vy, -500);
@@ -557,6 +718,7 @@ function makePile(canvas, cfg){
       }
     }
     if (quiet) return;
+    if (Q) crewStep(dt);
     // leaves: layered sines + a push that springs off
     for (var l = 0; l < leaves.length; l++) {
       var L = leaves[l];
@@ -590,6 +752,8 @@ function makePile(canvas, cfg){
       g.globalAlpha = .9; g.drawImage(sp, -sp.width / dpr / 2, -sp.height / dpr / 2, sp.width / dpr, sp.height / dpr); g.restore();
     }
     g.globalAlpha = 1;
+    if (Q) drawTruck();
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
     for (var i = 0; i < items.length; i++) {
       var b = items[i], s = Junk.sprite(b.type, b.s, dpr), w = s.width / dpr;
       var sc = 1, al = 1;
@@ -600,6 +764,8 @@ function makePile(canvas, cfg){
       g.drawImage(s, -w / 2, -w / 2, w, w); g.restore();
     }
     g.globalAlpha = 1;
+    if (Q) drawMan();
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.globalAlpha = 1;
     for (var k = tags.length - 1; k >= 0; k--) {
       var T = tags[k]; T.t += 1 / 60; if (T.t > 1.1) { tags.splice(k, 1); continue; }
       g.globalAlpha = Math.max(0, 1 - T.t / 1.1); g.fillStyle = '#8be35f'; g.font = '900 ' + (phone ? 17 : 20) + 'px ' + getComputedStyle(document.body).fontFamily;
@@ -613,7 +779,20 @@ function makePile(canvas, cfg){
   paint(1);
   Loop.add(canvas, function(dt, t){ t0 = t; rect = canvas.getBoundingClientRect(); step(dt, t); paint(t); Pointer.decay(dt); });
 }
-makePile(document.getElementById('pile-hero'));
+makePile(document.getElementById('pile-hero'), {
+  phoneCount: 11, deskCount: 30,
+  phoneSize: [36, 54], deskSize: [50, 82],
+  autoplay: 0,                          // the worker is the self-playing part here
+  crew: {
+    scale: [.72, 1.3],                  // truck + worker size [phone, desktop]
+    person: 1.3,                        // worker size relative to the truck
+    walk: 80,                           // worker walking speed (px/s at desktop size)
+    gap: [20, 46],                      // open ground between the truck and the pile
+    load: [4, 7],                       // pieces in the bed before the truck hauls it off
+    bed: .85,                           // junk shrinks to this when carried / in the bed
+    away: 1.6                           // seconds the truck is gone before it backs in empty
+  }
+});
 makePile(document.getElementById('pile-close'), { phoneCount: 12, deskCount: 26, phoneSize: [38, 56], deskSize: [50, 84], haulHeight: [150, 220], leaves: [6, 14] });
 
 /* ============ SEAMS ============ */
